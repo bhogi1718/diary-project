@@ -1,0 +1,120 @@
+.diary-editor {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+}
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 2px solid #f0f0f0;
+  background: #fafafa;
+  gap: 15px;
+}
+
+.editor-header h2 {
+  flex: 1;
+  margin: 0;
+  color: #333;
+  font-size: 18px;
+}
+
+.close-btn,
+.save-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.close-btn {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.close-btn:hover {
+  background: #e0e0e0;
+}
+
+.save-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.save-btn:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+
+.save-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.title-input {
+  padding: 15px 20px;
+  font-size: 24px;
+  font-weight: 600;
+  border: none;
+  border-bottom: 2px solid #f0f0f0;
+  outline: none;
+  color: #333;
+}
+
+.title-input:focus {
+  border-bottom-color: #667eea;
+}
+
+.content-textarea {
+  flex: 1;
+  padding: 20px;
+  font-size: 16px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border: none;
+  outline: none;
+  resize: none;
+  color: #333;
+  line-height: 1.6;
+}
+
+.content-textarea:focus {
+  background: #f9f9f9;
+}
+
+.error-message {
+  background: #ffebee;
+  color: #c62828;
+  padding: 12px 20px;
+  border-bottom: 2px solid #ffcdd2;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .editor-header {
+    flex-wrap: wrap;
+  }
+
+  .editor-header h2 {
+    flex: 1 0 100%;
+  }
+
+  .close-btn,
+  .save-btn {
+    flex: 1;
+  }
+
+  .title-input {
+    font-size: 20px;
+  }
+
+  .content-textarea {
+    font-size: 14px;
+    padding: 15px;
+  }
+}
