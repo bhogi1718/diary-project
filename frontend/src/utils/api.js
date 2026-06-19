@@ -22,8 +22,8 @@ export const login = (email, password) =>
   api.post('/auth/login', { email, password });
 
 // Diary endpoints
-export const createEntry = (title, encryptedContent) =>
-  api.post('/diary', { title, encryptedContent });
+export const createEntry = (title, encryptedContent, date) =>
+  api.post('/diary', { title, encryptedContent, date });
 
 export const getEntries = () =>
   api.get('/diary');
@@ -31,8 +31,8 @@ export const getEntries = () =>
 export const getEntry = (id) =>
   api.get(`/diary/${id}`);
 
-export const updateEntry = (id, title, encryptedContent) =>
-  api.put(`/diary/${id}`, { title, encryptedContent });
+export const updateEntry = (id, title, encryptedContent, date) =>
+  api.put(`/diary/${id}`, { title, encryptedContent, date });
 
 export const deleteEntry = (id) =>
   api.delete(`/diary/${id}`);

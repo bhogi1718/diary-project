@@ -14,6 +14,10 @@ const diaryEntrySchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  date: {
+    type: Date,
+    default: Date.now
+  },
   createdAt: {
     type: Date,
     default: Date.now

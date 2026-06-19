@@ -6,12 +6,14 @@ import '../styles/DiaryEditor.css';
 export default function DiaryEditor({ entry, password, onClose, onSave }) {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [date, setDate] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
     if (entry) {
       setTitle(entry.title);
+      setDate(entry.date ? new Date(entry.date).toISOString().split('T')[0] : '');
       try {
         const decrypted = decryptData(entry.encryptedContent, password);
         setContent(decrypted);
@@ -22,6 +24,7 @@ export default function DiaryEditor({ entry, password, onClose, onSave }) {
     } else {
       setTitle('');
       setContent('');
+      setDate(new Date().toISOString().split('T')[0]);
     }
   }, [entry, password]);
 
@@ -36,11 +39,12 @@ export default function DiaryEditor({ entry, password, onClose, onSave }) {
       setError('');
 
       const encryptedContent = encryptData(content, password);
+      const entryDate = date ? new Date(date) : new Date();
 
       if (entry) {
-        await updateEntry(entry._id, title, encryptedContent);
+        await updateEntry(entry._id, title, encryptedContent, entryDate);
       } else {
-        await createEntry(title, encryptedContent);
+        await createEntry(title, encryptedContent, entryDate);
       }
 
       onSave();
@@ -67,13 +71,21 @@ export default function DiaryEditor({ entry, password, onClose, onSave }) {
 
       {error && <div className="error-message">{error}</div>}
 
-      <input
-        type="text"
-        placeholder="Entry Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        className="title-input"
-      />
+      <div className="editor-top">
+        <input
+          type="text"
+          placeholder="Entry Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="title-input"
+        />
+        <input
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          className="date-input"
+        />
+      </div>
 
       <textarea
         placeholder="Write your thoughts here..."

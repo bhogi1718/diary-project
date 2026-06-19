@@ -66,7 +66,7 @@ export default function DiaryList({ onSelectEntry, onNewEntry, refreshTrigger })
                 </button>
               </div>
               <p className="entry-date">
-                {new Date(entry.createdAt).toLocaleDateString()}
+                {new Date(entry.date || entry.createdAt).toLocaleDateString()}
               </p>
             </div>
           ))

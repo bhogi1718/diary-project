@@ -7,7 +7,7 @@ const router = express.Router();
 // Create entry
 router.post('/', authMiddleware, async (req, res) => {
   try {
-    const { title, encryptedContent } = req.body;
+    const { title, encryptedContent, date } = req.body;
 
     if (!title || !encryptedContent) {
       return res.status(400).json({ message: 'Title and content required' });
@@ -16,7 +16,8 @@ router.post('/', authMiddleware, async (req, res) => {
     const entry = new DiaryEntry({
       userId: req.userId,
       title,
-      encryptedContent
+      encryptedContent,
+      date: date || Date.now()
     });
 
     await entry.save();
@@ -54,7 +55,7 @@ router.get('/:id', authMiddleware, async (req, res) => {
 // Update entry
 router.put('/:id', authMiddleware, async (req, res) => {
   try {
-    const { title, encryptedContent } = req.body;
+    const { title, encryptedContent, date } = req.body;
 
     let entry = await DiaryEntry.findOne({ _id: req.params.id, userId: req.userId });
 
@@ -64,6 +65,7 @@ router.put('/:id', authMiddleware, async (req, res) => {
 
     entry.title = title || entry.title;
     entry.encryptedContent = encryptedContent || entry.encryptedContent;
+    entry.date = date || entry.date;
     entry.updatedAt = Date.now();
 
     await entry.save();
