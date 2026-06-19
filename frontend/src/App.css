@@ -8,17 +8,16 @@
   --primary: #667eea;
   --primary-dark: #5568d3;
   --secondary: #764ba2;
-  --success: #48bb78;
-  --danger: #f56565;
-  --warning: #ed8936;
-  --light: #f7fafc;
-  --dark: #2d3748;
+  --accent: #f093fb;
+  --light: #f8f9ff;
+  --lighter: #f0f4ff;
+  --dark: #1a202c;
   --border: #e2e8f0;
 }
 
 body {
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   color: var(--dark);
   min-height: 100vh;
 }
@@ -27,18 +26,19 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: var(--light);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .app-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 40px;
+  padding: 24px 40px;
   background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   color: white;
-  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-  border-bottom: 4px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.25);
+  border-bottom: 3px solid rgba(255, 255, 255, 0.15);
+  z-index: 100;
 }
 
 .app-header h1 {
@@ -47,23 +47,29 @@ body {
   letter-spacing: -0.5px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .app-header h1::before {
   content: '📔';
-  font-size: 32px;
+  font-size: 36px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
 }
 
 .logout-btn {
-  padding: 10px 24px;
+  padding: 11px 26px;
   background: rgba(255, 255, 255, 0.15);
   border: 2px solid rgba(255, 255, 255, 0.3);
   color: white;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
 }
@@ -72,22 +78,31 @@ body {
   background: rgba(255, 255, 255, 0.25);
   border-color: rgba(255, 255, 255, 0.5);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .app-main {
   flex: 1;
   display: flex;
   overflow: hidden;
-  background: var(--light);
+  background: linear-gradient(to bottom,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(240, 244, 255, 0.9) 50%,
+    rgba(248, 249, 255, 0.85) 100%);
 }
 
 @media (max-width: 768px) {
   .app-header {
-    padding: 15px 20px;
+    padding: 16px 20px;
+    flex-direction: column;
+    gap: 12px;
   }
 
   .app-header h1 {
     font-size: 22px;
+  }
+
+  .app-main {
+    flex-direction: column;
   }
 }
