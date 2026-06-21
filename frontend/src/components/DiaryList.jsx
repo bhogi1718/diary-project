@@ -100,7 +100,7 @@ export default function DiaryList({ onSelectEntry, onNewEntry, refreshTrigger })
         ) : (
           filteredEntries.map((entry) => {
             const entryDate = new Date(entry.date || entry.createdAt);
-            const formattedDate = `${String(entryDate.getDate()).padStart(2, '0')}${String(entryDate.getMonth() + 1).padStart(2, '0')}${entryDate.getFullYear()}`;
+            const formattedDate = `${String(entryDate.getDate()).padStart(2, '0')}/${String(entryDate.getMonth() + 1).padStart(2, '0')}/${entryDate.getFullYear()}`;
             return (
               <div
                 key={entry._id}
