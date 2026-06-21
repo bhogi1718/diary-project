@@ -7,7 +7,8 @@ export default function DiaryList({ onSelectEntry, onNewEntry, refreshTrigger })
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
-  const [filterDate, setFilterDate] = useState('');
+  const [filterStartDate, setFilterStartDate] = useState('');
+  const [filterEndDate, setFilterEndDate] = useState('');
 
   useEffect(() => {
     fetchEntries();
@@ -41,9 +42,16 @@ export default function DiaryList({ onSelectEntry, onNewEntry, refreshTrigger })
   const getFilteredAndSortedEntries = () => {
     let filtered = entries.filter(entry => {
       const matchesSearch = entry.title.toLowerCase().includes(searchQuery.toLowerCase());
-      const entryDate = new Date(entry.date || entry.createdAt).toISOString().split('T')[0];
-      const matchesFilter = !filterDate || entryDate === filterDate;
-      return matchesSearch && matchesFilter;
+      const entryDate = new Date(entry.date || entry.createdAt);
+
+      let matchesDateFilter = true;
+      if (filterStartDate || filterEndDate) {
+        const startDate = filterStartDate ? new Date(filterStartDate) : new Date('1900-01-01');
+        const endDate = filterEndDate ? new Date(filterEndDate) : new Date('2099-12-31');
+        matchesDateFilter = entryDate >= startDate && entryDate <= endDate;
+      }
+
+      return matchesSearch && matchesDateFilter;
     });
 
     return filtered.sort((a, b) => {
@@ -72,16 +80,27 @@ export default function DiaryList({ onSelectEntry, onNewEntry, refreshTrigger })
         />
         <input
           type="date"
-          value={filterDate}
-          onChange={(e) => setFilterDate(e.target.value)}
+          placeholder="Start Date"
+          value={filterStartDate}
+          onChange={(e) => setFilterStartDate(e.target.value)}
           className="filter-date-input"
+          title="Start Date"
         />
-        {(searchQuery || filterDate) && (
+        <input
+          type="date"
+          placeholder="End Date"
+          value={filterEndDate}
+          onChange={(e) => setFilterEndDate(e.target.value)}
+          className="filter-date-input"
+          title="End Date"
+        />
+        {(searchQuery || filterStartDate || filterEndDate) && (
           <button
             className="clear-filter-btn"
             onClick={() => {
               setSearchQuery('');
-              setFilterDate('');
+              setFilterStartDate('');
+              setFilterEndDate('');
             }}
           >
             Clear
