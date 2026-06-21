@@ -32,6 +32,55 @@
   background-clip: text;
 }
 
+.filter-section {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+  background: rgba(240, 244, 255, 0.4);
+  flex-wrap: wrap;
+}
+
+.search-input,
+.filter-date-input {
+  flex: 1;
+  min-width: 120px;
+  padding: 8px 12px;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  border-radius: 8px;
+  font-size: 13px;
+  color: #1a202c;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus,
+.filter-date-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 8px rgba(102, 126, 234, 0.2);
+  background: #f8f9ff;
+}
+
+.clear-filter-btn {
+  padding: 8px 12px;
+  background: rgba(245, 101, 101, 0.1);
+  color: #c53030;
+  border: 1px solid rgba(245, 101, 101, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.clear-filter-btn:hover {
+  background: rgba(245, 101, 101, 0.2);
+  border-color: #c53030;
+  color: #742a2a;
+}
+
 .new-btn {
   padding: 11px 18px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -187,6 +236,16 @@
   }
 
   .new-btn {
+    width: 100%;
+  }
+
+  .filter-section {
+    flex-direction: column;
+  }
+
+  .search-input,
+  .filter-date-input,
+  .clear-filter-btn {
     width: 100%;
   }
 }

@@ -84,6 +84,7 @@ export default function DiaryEditor({ entry, password, onClose, onSave }) {
           value={date}
           onChange={(e) => setDate(e.target.value)}
           className="date-input"
+          max={new Date().toISOString().split('T')[0]}
         />
       </div>
 

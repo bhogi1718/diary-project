@@ -6,6 +6,8 @@ export default function DiaryList({ onSelectEntry, onNewEntry, refreshTrigger })
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filterDate, setFilterDate] = useState('');
 
   useEffect(() => {
     fetchEntries();
@@ -36,6 +38,23 @@ export default function DiaryList({ onSelectEntry, onNewEntry, refreshTrigger })
     }
   };
 
+  const getFilteredAndSortedEntries = () => {
+    let filtered = entries.filter(entry => {
+      const matchesSearch = entry.title.toLowerCase().includes(searchQuery.toLowerCase());
+      const entryDate = new Date(entry.date || entry.createdAt).toISOString().split('T')[0];
+      const matchesFilter = !filterDate || entryDate === filterDate;
+      return matchesSearch && matchesFilter;
+    });
+
+    return filtered.sort((a, b) => {
+      const dateA = new Date(a.date || a.createdAt);
+      const dateB = new Date(b.date || b.createdAt);
+      return dateB - dateA;
+    });
+  };
+
+  const filteredEntries = getFilteredAndSortedEntries();
+
   return (
     <div className="diary-list">
       <div className="list-header">
@@ -43,14 +62,43 @@ export default function DiaryList({ onSelectEntry, onNewEntry, refreshTrigger })
         <button className="new-btn" onClick={onNewEntry}>+ New Entry</button>
       </div>
 
+      <div className="filter-section">
+        <input
+          type="text"
+          placeholder="Search entries..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="search-input"
+        />
+        <input
+          type="date"
+          value={filterDate}
+          onChange={(e) => setFilterDate(e.target.value)}
+          className="filter-date-input"
+        />
+        {(searchQuery || filterDate) && (
+          <button
+            className="clear-filter-btn"
+            onClick={() => {
+              setSearchQuery('');
+              setFilterDate('');
+            }}
+          >
+            Clear
+          </button>
+        )}
+      </div>
+
       {error && <div className="error-message">{error}</div>}
       {loading && <p>Loading entries...</p>}
 
       <div className="entries-container">
-        {entries.length === 0 ? (
-          <p className="no-entries">No entries yet. Start writing!</p>
+        {filteredEntries.length === 0 ? (
+          <p className="no-entries">
+            {entries.length === 0 ? 'No entries yet. Start writing!' : 'No entries match your filter.'}
+          </p>
         ) : (
-          entries.map(entry => (
+          filteredEntries.map(entry => (
             <div
               key={entry._id}
               className="entry-item"
