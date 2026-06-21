@@ -98,23 +98,27 @@ export default function DiaryList({ onSelectEntry, onNewEntry, refreshTrigger })
             {entries.length === 0 ? 'No entries yet. Start writing!' : 'No entries match your filter.'}
           </p>
         ) : (
-          filteredEntries.map((entry, index) => (
-            <div
-              key={entry._id}
-              className="entry-item"
-              onClick={() => onSelectEntry(entry)}
-            >
-              <div className="entry-header">
-                <h3>{new Date(entry.date || entry.createdAt).toLocaleDateString()} #{index + 1}</h3>
-                <button
-                  className="delete-btn"
-                  onClick={(e) => handleDelete(entry._id, e)}
-                >
-                  Delete
-                </button>
+          filteredEntries.map((entry) => {
+            const entryDate = new Date(entry.date || entry.createdAt);
+            const formattedDate = `${String(entryDate.getDate()).padStart(2, '0')}${String(entryDate.getMonth() + 1).padStart(2, '0')}${entryDate.getFullYear()}`;
+            return (
+              <div
+                key={entry._id}
+                className="entry-item"
+                onClick={() => onSelectEntry(entry)}
+              >
+                <div className="entry-header">
+                  <h3>{formattedDate}</h3>
+                  <button
+                    className="delete-btn"
+                    onClick={(e) => handleDelete(entry._id, e)}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
-            </div>
-          ))
+            );
+          })
         )}
       </div>
     </div>
