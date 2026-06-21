@@ -62,7 +62,7 @@ function App() {
   return (
     <div className="app-container">
       <header className="app-header">
-        <h1>📓 My Secure Diary</h1>
+        <h1>Secure Diary</h1>
         <button className="logout-btn" onClick={handleLogout}>Logout</button>
       </header>
 
