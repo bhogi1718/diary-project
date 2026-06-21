@@ -98,27 +98,37 @@ export default function DiaryList({ onSelectEntry, onNewEntry, refreshTrigger })
             {entries.length === 0 ? 'No entries yet. Start writing!' : 'No entries match your filter.'}
           </p>
         ) : (
-          filteredEntries.map((entry, index) => {
-            const entryDate = new Date(entry.date || entry.createdAt);
-            const formattedDate = `${String(entryDate.getDate()).padStart(2, '0')}/${String(entryDate.getMonth() + 1).padStart(2, '0')}/${entryDate.getFullYear()}`;
-            const entryNumber = -(index + 1);
-            return (
-              <div
-                key={entry._id}
-                className="entry-item"
-                onClick={() => onSelectEntry(entry)}
-              >
-                <div className="entry-header">
-                  <h3>{formattedDate} {entryNumber}</h3>
-                  <button
-                    className="delete-btn"
-                    onClick={(e) => handleDelete(entry._id, e)}
-                  >
-                    Delete
-                  </button>
+          (() => {
+            const dateGroups = {};
+            filteredEntries.forEach(entry => {
+              const entryDate = new Date(entry.date || entry.createdAt);
+              const dateKey = `${String(entryDate.getDate()).padStart(2, '0')}/${String(entryDate.getMonth() + 1).padStart(2, '0')}/${entryDate.getFullYear()}`;
+              if (!dateGroups[dateKey]) {
+                dateGroups[dateKey] = [];
+              }
+              dateGroups[dateKey].push(entry);
+            });
+
+            return Object.entries(dateGroups).flatMap(([date, entriesForDate]) =>
+              entriesForDate.map((entry, index) => (
+                <div
+                  key={entry._id}
+                  className="entry-item"
+                  onClick={() => onSelectEntry(entry)}
+                >
+                  <div className="entry-header">
+                    <h3>{date}-{index + 1}</h3>
+                    <button
+                      className="delete-btn"
+                      onClick={(e) => handleDelete(entry._id, e)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ))
             );
+          })())
           })
         )}
       </div>
