@@ -3,114 +3,63 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #0a0e27 0%, #1a0a3e 50%, #0a0e27 100%);
+  background: var(--bg-secondary);
   position: relative;
   overflow: hidden;
-}
-
-.diary-editor::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(0, 217, 255, 0.08) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  animation: floatPulse 6s ease-in-out infinite;
-}
-
-.diary-editor::after {
-  content: '';
-  position: absolute;
-  bottom: -40%;
-  left: -40%;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(199, 0, 255, 0.08) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  animation: floatPulse 8s ease-in-out infinite 1s;
-}
-
-@keyframes floatPulse {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(40px, -40px) scale(1.1); }
 }
 
 .editor-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 32px;
-  border-bottom: 2px solid;
-  border-image: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple)) 1;
-  background: linear-gradient(90deg, rgba(10, 14, 39, 0.8), rgba(26, 10, 62, 0.6));
-  backdrop-filter: blur(15px);
+  padding: 20px 32px;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-secondary);
   gap: 16px;
   z-index: 10;
-  position: relative;
-}
-
-.editor-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, var(--neon-cyan), transparent, var(--neon-purple));
-  opacity: 0.5;
+  box-shadow: var(--shadow-sm);
 }
 
 .editor-header h2 {
   flex: 1;
   margin: 0;
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .close-btn,
 .save-btn {
-  padding: 12px 28px;
-  border-radius: 2px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
-  font-weight: 800;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
-  border: 2px solid;
+  font-weight: 600;
+  font-size: 13px;
+  transition: all 0.2s ease;
 }
 
 .close-btn {
-  background: transparent;
-  border-color: var(--neon-cyan);
-  color: var(--neon-cyan);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
 }
 
 .close-btn:hover {
-  background: rgba(0, 217, 255, 0.1);
-  box-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
+  background: var(--border-color);
+  box-shadow: var(--shadow-sm);
 }
 
 .save-btn {
-  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
-  color: var(--bg-dark);
-  border-color: transparent;
-  box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+  background: var(--accent);
+  color: white;
+  border: none;
 }
 
 .save-btn:hover:not(:disabled) {
-  box-shadow: 0 0 30px rgba(0, 217, 255, 0.6), 0 0 60px rgba(199, 0, 255, 0.3);
-  transform: translateY(-2px);
+  background: var(--accent-hover);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 .save-btn:active:not(:disabled) {
@@ -118,116 +67,98 @@
 }
 
 .save-btn:disabled {
-  opacity: 0.5;
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
 .editor-top {
   display: flex;
-  gap: 18px;
-  padding: 24px 32px;
+  gap: 16px;
+  padding: 20px 32px;
   align-items: center;
-  border-bottom: 1px solid rgba(0, 217, 255, 0.2);
-  background: rgba(10, 14, 39, 0.5);
-  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-secondary);
   z-index: 5;
 }
 
 .title-input {
   flex: 1;
   padding: 8px 0;
-  font-size: 24px;
-  font-weight: 800;
+  font-size: 18px;
+  font-weight: 700;
   border: none;
   outline: none;
-  color: var(--white);
+  color: var(--text-primary);
   background: transparent;
-  font-family: 'Space Grotesk', sans-serif;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
+  font-family: inherit;
+  letter-spacing: -0.3px;
+  transition: all 0.2s ease;
 }
 
 .title-input::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+  color: var(--text-secondary);
 }
 
 .title-input:focus {
-  color: var(--neon-cyan);
-  text-shadow: 0 0 12px rgba(0, 217, 255, 0.5);
+  color: var(--accent);
 }
 
 .date-input {
-  padding: 10px 14px;
-  font-size: 12px;
-  border: 2px solid var(--neon-cyan);
-  border-radius: 2px;
+  padding: 10px 12px;
+  font-size: 13px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
   outline: none;
   cursor: pointer;
-  background: rgba(0, 217, 255, 0.05);
-  color: var(--neon-cyan);
-  font-weight: 700;
-  transition: all 0.3s ease;
-  font-family: 'Space Grotesk', sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
 .date-input:hover {
-  background: rgba(0, 217, 255, 0.1);
-  box-shadow: 0 0 12px rgba(0, 217, 255, 0.3);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-sm);
 }
 
 .date-input:focus {
-  border-color: var(--neon-purple);
-  background: rgba(0, 217, 255, 0.15);
-  box-shadow: 0 0 20px rgba(199, 0, 255, 0.4);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  background: var(--bg-secondary);
 }
 
 .content-textarea {
   flex: 1;
-  padding: 32px;
-  font-size: 16px;
-  font-family: 'Space Grotesk', sans-serif;
+  padding: 24px 32px;
+  font-size: 15px;
+  font-family: inherit;
   border: none;
   outline: none;
   resize: none;
-  color: var(--white);
-  line-height: 1.8;
-  background: transparent;
+  color: var(--text-primary);
+  line-height: 1.7;
+  background: var(--bg-secondary);
   z-index: 5;
   scroll-behavior: smooth;
 }
 
 .content-textarea::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+  color: var(--text-secondary);
 }
 
 .content-textarea:focus {
-  color: var(--neon-cyan);
+  color: var(--text-primary);
 }
 
 .error-message {
-  background: linear-gradient(135deg, rgba(255, 0, 110, 0.15), rgba(255, 100, 140, 0.05));
-  color: var(--neon-pink);
-  padding: 14px 32px;
-  border-bottom: 2px solid;
-  border-image: linear-gradient(90deg, var(--neon-pink), rgba(255, 0, 110, 0.3)) 1;
-  font-size: 12px;
+  background: #fef2f2;
+  color: #991b1b;
+  padding: 12px 32px;
+  border-bottom: 1px solid #fecaca;
+  font-size: 13px;
+  border-left: 3px solid #dc2626;
+  font-weight: 500;
   z-index: 20;
-  animation: slideDown 0.3s ease-out;
-  box-shadow: 0 0 15px rgba(255, 0, 110, 0.2);
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 @media (max-width: 768px) {
@@ -238,14 +169,14 @@
 
   .editor-header h2 {
     flex: 1 0 100%;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .close-btn,
   .save-btn {
     flex: 1;
     padding: 10px 12px;
-    font-size: 10px;
+    font-size: 13px;
   }
 
   .editor-top {
@@ -256,7 +187,7 @@
 
   .title-input {
     width: 100%;
-    font-size: 20px;
+    font-size: 16px;
   }
 
   .date-input {
