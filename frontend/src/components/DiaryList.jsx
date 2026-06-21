@@ -147,9 +147,7 @@ export default function DiaryList({ onSelectEntry, onNewEntry, refreshTrigger })
                 </div>
               ))
             );
-          })())
-          })
-        )}
+          })())}
       </div>
     </div>
   );
