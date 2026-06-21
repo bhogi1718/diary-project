@@ -1,12 +1,5 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "npm install && npm run build",
   "outputDirectory": "dist",
-  "framework": "vite",
-  "env": {
-    "VITE_API_URL": {
-      "description": "API base URL for the backend",
-      "required": false,
-      "default": "http://localhost:5000"
-    }
-  }
+  "framework": "vite"
 }
