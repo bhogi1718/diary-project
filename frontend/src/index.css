@@ -2,26 +2,91 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-@layer components {
-  body {
-    @apply antialiased;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  }
-
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-  }
-
-  #root {
-    @apply min-h-screen w-full;
-  }
-}
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 :root {
-  --primary: #0f172a;
-  --secondary: #06b6d4;
-  --accent: #0ea5e9;
-  --success: #10b981;
-  --danger: #ef4444;
-  --warning: #f59e0b;
+  --bg-dark: #0a0e27;
+  --bg-darker: #050812;
+  --neon-cyan: #00d9ff;
+  --neon-purple: #c700ff;
+  --neon-pink: #ff006e;
+  --neon-green: #00ff41;
+  --white: #ffffff;
+  --gray: #b4b4b4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background: linear-gradient(135deg, var(--bg-darker) 0%, #1a1a3e 100%);
+  color: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Utility Classes */
+.text-glow-cyan {
+  filter: drop-shadow(0 0 8px rgba(0, 217, 255, 0.5));
+}
+
+.text-glow-purple {
+  filter: drop-shadow(0 0 8px rgba(199, 0, 255, 0.5));
+}
+
+.neon-border {
+  border-image: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple)) 1;
+}
+
+.backdrop-blur-glass {
+  backdrop-filter: blur(20px);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--neon-cyan), var(--neon-purple));
+  border-radius: 4px;
+  opacity: 0.6;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  opacity: 1;
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(0, 217, 255, 0.3);
+  color: var(--white);
+}
+
+::-moz-selection {
+  background: rgba(0, 217, 255, 0.3);
+  color: var(--white);
 }
