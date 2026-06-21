@@ -5,73 +5,119 @@
 }
 
 :root {
-  --primary: #1e3a5f;
-  --primary-light: #2d5a8c;
-  --secondary: #0ea5e9;
-  --accent: #06b6d4;
-  --light: #f8fafc;
-  --lighter: #f1f5f9;
+  --primary: #0f172a;
+  --primary-light: #1e293b;
+  --secondary: #06b6d4;
+  --accent: #0ea5e9;
+  --light: #f0f4f8;
+  --lighter: #f8fafc;
   --dark: #0f172a;
   --border: #cbd5e1;
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-dark: rgba(15, 23, 42, 0.05);
+  --gradient-1: linear-gradient(135deg, #06b6d4 0%, #0ea5e9 100%);
+  --gradient-2: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
   --success: #10b981;
   --error: #ef4444;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-  background: var(--light);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #f0f4f8 0%, #f8fafc 100%);
   color: var(--dark);
   min-height: 100vh;
+  overflow: hidden;
 }
 
 .app-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: var(--light);
+  background: linear-gradient(135deg, #f0f4f8 0%, #e8f0f6 100%);
+  position: relative;
+}
+
+.app-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(14, 165, 233, 0.1) 100%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .app-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 40px;
-  background: var(--primary);
+  padding: 24px 48px;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(20px);
   color: white;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   z-index: 100;
+  position: relative;
+  overflow: hidden;
+}
+
+.app-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, rgba(6, 182, 212, 0.05) 0%, rgba(14, 165, 233, 0.05) 100%);
+  pointer-events: none;
 }
 
 .app-header h1 {
-  font-size: 24px;
-  font-weight: 600;
-  letter-spacing: -0.3px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #06b6d4 0%, #0ea5e9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  z-index: 1;
 }
 
 .logout-btn {
-  padding: 10px 24px;
-  background: var(--secondary);
-  border: none;
-  color: white;
-  border-radius: 6px;
+  padding: 12px 28px;
+  background: rgba(6, 182, 212, 0.15);
+  border: 1.5px solid rgba(6, 182, 212, 0.5);
+  color: #06b6d4;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
-  font-weight: 500;
-  transition: all 0.2s ease;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  z-index: 1;
 }
 
 .logout-btn:hover {
-  background: #0284c7;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25);
+  background: rgba(6, 182, 212, 0.25);
+  border-color: #06b6d4;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(6, 182, 212, 0.3);
+}
+
+.logout-btn:active {
+  transform: translateY(0);
 }
 
 .app-main {
   flex: 1;
   display: flex;
   overflow: hidden;
-  background: var(--light);
+  background: linear-gradient(135deg, #f0f4f8 0%, #e8f0f6 100%);
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 768px) {

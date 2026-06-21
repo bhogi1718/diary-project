@@ -1,40 +1,27 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer components {
+  body {
+    @apply antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  }
+
+  #root {
+    @apply min-h-screen w-full;
+  }
+}
+
 :root {
-  --primary: #1e3a5f;
-  --primary-light: #2d5a8c;
-  --secondary: #0ea5e9;
-  --accent: #06b6d4;
+  --primary: #0f172a;
+  --secondary: #06b6d4;
+  --accent: #0ea5e9;
   --success: #10b981;
   --danger: #ef4444;
   --warning: #f59e0b;
-  --light: #f8fafc;
-  --lighter: #f1f5f9;
-  --dark: #0f172a;
-  --border: #cbd5e1;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: var(--light);
-  color: var(--dark);
-  margin: 0;
-}
-
-#root {
-  min-height: 100vh;
-  width: 100%;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
